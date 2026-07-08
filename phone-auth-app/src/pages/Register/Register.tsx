@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 import registerIllustration from '../../assets/images/register_illustration.png';
 import { setupRecaptcha, sendOTP } from '../../firebase/auth';
 
-const API_URL = "https://machine-test-sphx.onrender.com";
+const API_URL = import.meta.env.VITE_API_URL || "https://machine-test-sphx.onrender.com/api/auth";
 
 interface RegisterResponse {
   success: boolean;

@@ -7,7 +7,7 @@ import { setupRecaptcha, sendOTP, verifyOTP } from '../../firebase/auth';
 import { useToast } from '../../components/Toast';
 import type { RecaptchaVerifier } from 'firebase/auth';
 
-const API_URL = import.meta.env.VITE_API_URL || "https://machine-test-sphx.onrender.com";
+const API_URL = import.meta.env.VITE_API_URL || "https://machine-test-sphx.onrender.com/api/auth"; 
 
 interface RegisterResponse {
   success: boolean;
