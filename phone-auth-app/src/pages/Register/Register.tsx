@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 import registerIllustration from '../../assets/images/register_illustration.png';
 import { setupRecaptcha, sendOTP } from '../../firebase/auth';
 
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "https://machine-test-sphx.onrender.com";
 
 interface RegisterResponse {
   success: boolean;

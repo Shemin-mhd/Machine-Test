@@ -4,8 +4,16 @@ import authRouter from "./routes/auth.routes";
 
 const app = express();
 
+app.use(
+  cors({
+    origin: [
+      "https://machine-test-sphx.onrender.com",
+      "machine-test-bx31.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 
-app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
