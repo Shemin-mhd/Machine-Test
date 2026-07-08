@@ -7,8 +7,8 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://machine-test-sphx.onrender.com",
-      "machine-test-bx31.vercel.app",
+      "http://localhost:5173",
+      "https://machine-test-bx31.vercel.app",
     ],
     credentials: true,
   })
