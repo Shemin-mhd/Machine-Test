@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import AuthLayout from '../../components/AuthLayout';
@@ -58,8 +58,16 @@ export const Register: React.FC = () => {
   const [recaptchaVerifier, setRecaptchaVerifier] = useState<any>(null);
   const { showToast } = useToast();
 
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/home');
+    }
+  }, [isLoggedIn, navigate]);
+
   const prefilledPhone = location.state?.phoneNumber || '';
-  
+
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormInputs>({
     defaultValues: {
       phoneNumber: prefilledPhone,
@@ -88,7 +96,7 @@ export const Register: React.FC = () => {
           localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('phoneNumber', data.phoneNumber);
           showToast('Registration successful! Welcome!', 'success');
-          navigate('/');
+          navigate('/home');
         } else {
           setErrorMsg(response.message || 'Registration failed on backend.');
           showToast(response.message || 'Registration failed on backend.', 'error');
@@ -145,7 +153,7 @@ export const Register: React.FC = () => {
   return (
     <AuthLayout illustration={registerIllustration} reverse={true} maxWidth="max-w-[440px]" hideLogo={true}>
       <div className="w-full animate-fadeIn">
-    
+
         <h1 className="text-[32px] font-bold text-gray-900 tracking-tight leading-none mb-2 font-sans">
           Sign up
         </h1>
@@ -202,7 +210,7 @@ export const Register: React.FC = () => {
             })}
           />
 
-          
+
           <div>
             <div className="flex items-center gap-2 select-none py-1">
               <input

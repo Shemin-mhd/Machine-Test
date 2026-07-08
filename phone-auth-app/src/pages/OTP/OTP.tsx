@@ -1,26 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import AuthLayout from '../../components/AuthLayout';
 import Button from '../../components/Button';
 import Loader from '../../components/Loader';
 import { setupRecaptcha, sendOTP, verifyOTP } from '../../firebase/auth';
+import { useToast } from '../../components/Toast';
+import type { RecaptchaVerifier } from 'firebase/auth';
 
-const API_URL = "http://localhost:5000/api/auth";
-
-interface LoginVerifyResponse {
-  success: boolean;
-  token?: string;
-  registrationRequired?: boolean;
-  user?: {
-    id: string;
-    uid: string;
-    phoneNumber: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-  };
-  message?: string;
-}
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api/auth";
 
 interface RegisterResponse {
   success: boolean;
@@ -53,8 +40,6 @@ const registerRequest = async (
   return response.json();
 };
 
-import { useToast } from '../../components/Toast';
-
 export const OTP: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -64,7 +49,7 @@ export const OTP: React.FC = () => {
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(30);
-  const [recaptchaVerifier, setRecaptchaVerifier] = useState<any>(null);
+  const [recaptchaVerifier, setRecaptchaVerifier] = useState<RecaptchaVerifier | null>(null);
   const { showToast } = useToast();
 
   const inputRefs = [
@@ -171,7 +156,7 @@ export const OTP: React.FC = () => {
           localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('phoneNumber', cleanedPhone);
           showToast('Registration successful! Welcome!', 'success');
-          navigate('/');
+          navigate('/home');
         } else {
           setError(response.message || 'Registration failed on backend.');
           showToast(response.message || 'Registration failed on backend.', 'error');

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import AuthLayout from '../../components/AuthLayout';
@@ -18,6 +18,14 @@ export const Login: React.FC = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [recaptchaVerifier, setRecaptchaVerifier] = useState<any>(null);
   const { showToast } = useToast();
+
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/home');
+    }
+  }, [isLoggedIn, navigate]);
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormInputs>();
 
@@ -43,7 +51,7 @@ export const Login: React.FC = () => {
       setErrorMsg(err.message || 'Failed to send OTP. Please try again.');
       showToast(err.message || 'Failed to send OTP. Please try again.', 'error');
 
-    
+
       const container = document.getElementById('recaptcha-container');
       if (container) {
         container.innerHTML = '';
@@ -55,7 +63,7 @@ export const Login: React.FC = () => {
   return (
     <AuthLayout>
       <div className="w-full animate-fadeIn">
-      
+
         <h1 className="text-[32px] font-bold text-gray-900 tracking-tight leading-none mb-2 font-sans">
           Login
         </h1>
@@ -63,7 +71,7 @@ export const Login: React.FC = () => {
           Login to access your travelwise account
         </p>
 
-    
+
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <Input
             label="Enter mobile number"
@@ -97,7 +105,7 @@ export const Login: React.FC = () => {
           <div id="recaptcha-container" className="flex justify-center mt-4"></div>
         </form>
 
-  
+
         <p className="mt-6 text-center text-[14px] text-gray-500 font-sans">
           Don't have an account?{' '}
           <Link
