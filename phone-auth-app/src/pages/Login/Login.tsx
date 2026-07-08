@@ -43,7 +43,7 @@ export const Login: React.FC = () => {
       setErrorMsg(err.message || 'Failed to send OTP. Please try again.');
       showToast(err.message || 'Failed to send OTP. Please try again.', 'error');
 
-      // Reset recaptcha container so we can try again
+    
       const container = document.getElementById('recaptcha-container');
       if (container) {
         container.innerHTML = '';
@@ -55,7 +55,7 @@ export const Login: React.FC = () => {
   return (
     <AuthLayout>
       <div className="w-full animate-fadeIn">
-        {/* Header */}
+      
         <h1 className="text-[32px] font-bold text-gray-900 tracking-tight leading-none mb-2 font-sans">
           Login
         </h1>
@@ -63,11 +63,17 @@ export const Login: React.FC = () => {
           Login to access your travelwise account
         </p>
 
-        {/* Form */}
+    
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <Input
             label="Enter mobile number"
             type="tel"
+            maxLength={10}
+            onKeyPress={(e) => {
+              if (!/[0-9]/.test(e.key)) {
+                e.preventDefault();
+              }
+            }}
             error={errors.phoneNumber?.message}
             {...register('phoneNumber', {
               required: 'Mobile number is required',
@@ -91,7 +97,7 @@ export const Login: React.FC = () => {
           <div id="recaptcha-container" className="flex justify-center mt-4"></div>
         </form>
 
-        {/* Footer Link */}
+  
         <p className="mt-6 text-center text-[14px] text-gray-500 font-sans">
           Don't have an account?{' '}
           <Link

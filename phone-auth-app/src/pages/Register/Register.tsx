@@ -145,7 +145,7 @@ export const Register: React.FC = () => {
   return (
     <AuthLayout illustration={registerIllustration} reverse={true} maxWidth="max-w-[440px]" hideLogo={true}>
       <div className="w-full animate-fadeIn">
-        {/* Header */}
+    
         <h1 className="text-[32px] font-bold text-gray-900 tracking-tight leading-none mb-2 font-sans">
           Sign up
         </h1>
@@ -153,7 +153,6 @@ export const Register: React.FC = () => {
           Let's get you all set up so you can access your personal account.
         </p>
 
-        {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div className="grid grid-cols-2 gap-4">
             <Input
@@ -187,6 +186,12 @@ export const Register: React.FC = () => {
             label="Phone Number"
             type="tel"
             disabled={!!location.state?.uid}
+            maxLength={10}
+            onKeyPress={(e) => {
+              if (!/[0-9]/.test(e.key)) {
+                e.preventDefault();
+              }
+            }}
             error={errors.phoneNumber?.message}
             {...register('phoneNumber', {
               required: 'Phone number is required',
@@ -197,7 +202,7 @@ export const Register: React.FC = () => {
             })}
           />
 
-          {/* Terms checkbox */}
+          
           <div>
             <div className="flex items-center gap-2 select-none py-1">
               <input
@@ -230,7 +235,6 @@ export const Register: React.FC = () => {
           <div id="recaptcha-container" className="flex justify-center mt-4"></div>
         </form>
 
-        {/* Footer Link */}
         <p className="mt-6 text-center text-[14px] text-gray-500 font-sans">
           Already have an account?{' '}
           <Link

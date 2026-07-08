@@ -3,9 +3,7 @@ import User from "../models/users";
 import generateToken from "../utils/generateToken";
 import { AuthRequest } from "../middleware/auth.middleware";
 
-// @desc    Verify if user exists, login or request registration
-// @route   POST /api/auth/login-verify
-// @access  Public
+
 export const loginVerify = async (req: Request, res: Response): Promise<void> => {
   try {
     const { uid, phoneNumber } = req.body;
@@ -21,7 +19,7 @@ export const loginVerify = async (req: Request, res: Response): Promise<void> =>
     });
 
     if (user) {
-      // User exists, log them in by issuing a token
+  
       const token = generateToken(user._id.toString());
       res.status(200).json({
         success: true,
@@ -37,7 +35,7 @@ export const loginVerify = async (req: Request, res: Response): Promise<void> =>
       });
       return;
     } else {
-      // User does not exist, registration is required
+    
       res.status(200).json({
         success: true,
         registrationRequired: true,
@@ -52,9 +50,7 @@ export const loginVerify = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
-// @desc    Register a new user
-// @route   POST /api/auth/register
-// @access  Public
+
 export const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const { uid, phoneNumber, firstName, lastName, email } = req.body;
@@ -70,7 +66,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     });
 
     if (user) {
-      // Update details
+      
       user.firstName = firstName;
       user.lastName = lastName;
       user.email = email;
@@ -108,9 +104,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// @desc    Get current user profile
-// @route   GET /api/auth/me
-// @access  Private
+
 export const getMe = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     if (!req.user) {

@@ -35,7 +35,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      {/* Toast portal overlay */}
+    
       <div className="fixed top-4 right-4 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4 sm:px-0">
         {toasts.map((toast) => (
           <div
@@ -49,19 +49,17 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               }
             `}
           >
-            {/* Icon */}
+            
             <div className="flex-shrink-0">
               {toast.type === 'success' && <IoCheckmarkCircle className="w-5 h-5 text-emerald-500" />}
               {toast.type === 'error' && <IoCloseCircle className="w-5 h-5 text-rose-500" />}
               {toast.type === 'info' && <IoInformationCircle className="w-5 h-5 text-blue-500" />}
             </div>
 
-            {/* Message */}
             <p className="text-[14px] font-sans font-medium flex-grow leading-relaxed">
               {toast.message}
             </p>
 
-            {/* Close Button */}
             <button
               onClick={() => removeToast(toast.id)}
               className="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"

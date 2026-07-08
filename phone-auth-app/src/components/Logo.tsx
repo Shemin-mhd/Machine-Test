@@ -15,12 +15,11 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 56 }) => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Black circle background */}
+       
         <circle cx="50" cy="50" r="46" fill="#000000" />
         
-        {/* Group to center contents */}
+    
         <g transform="translate(14, 35)">
-          {/* TOTAL- text */}
           <text
             x="0"
             y="21"
@@ -33,10 +32,9 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 56 }) => {
             TOTAL-
           </text>
           
-          {/* Yellow badge container for X */}
+         
           <rect x="52" y="3" width="20" height="24" rx="3" fill="#FACC15" />
           
-          {/* X text inside yellow box */}
           <text
             x="62"
             y="21"

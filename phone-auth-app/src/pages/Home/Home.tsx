@@ -21,17 +21,17 @@ export const Home = () => {
   };
 
   if (!isLoggedIn) {
-    return null; // Don't render home screen if redirecting
+    return null; 
   }
 
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center relative font-sans px-6">
-      {/* Top Right Logo - aligned precisely like the screenshot */}
+      
       <div className="absolute top-8 right-8 sm:top-12 sm:right-16">
         <Logo size={64} />
       </div>
 
-      {/* Centered Content Wrapper */}
+    
       <div className="w-full max-w-[420px] text-center flex flex-col items-center animate-fadeIn">
         {/* Success Icon Badge */}
         <div className="w-16 h-16 bg-[#4e5bf2]/10 text-[#4e5bf2] rounded-full flex items-center justify-center mb-6">
@@ -40,16 +40,15 @@ export const Home = () => {
           </svg>
         </div>
 
-        {/* Welcome message */}
+      
         <h1 className="text-[32px] font-bold text-gray-900 tracking-tight mb-3 font-sans">
           Welcome Back
         </h1>
 
         <p className="text-[15px] text-gray-400 mb-8 font-normal font-sans leading-relaxed px-4">
-          You are successfully authenticated using Firebase Phone Authentication
+          You are successfully Authenticated 
         </p>
 
-        {/* User details card */}
         <div className="w-full bg-gray-50/60 border border-gray-100 rounded-xl p-5 mb-8 text-left">
           <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1 font-sans">
             Authenticated Phone
@@ -59,7 +58,7 @@ export const Home = () => {
           </p>
         </div>
 
-        {/* Log Out Button */}
+      
         <button
           onClick={handleLogout}
           className="w-full py-4 bg-[#4e5bf2] text-white hover:bg-[#3d4ae0] font-semibold text-[15px] rounded-md transition-all duration-200 shadow-sm active:scale-[0.99] font-sans cursor-pointer"
@@ -67,7 +66,7 @@ export const Home = () => {
           Log Out
         </button>
 
-        {/* Subtle horizontal line matching the bottom of the screenshot */}
+    
         <div className="w-full border-t border-gray-100/80 mt-16"></div>
       </div>
     </div>

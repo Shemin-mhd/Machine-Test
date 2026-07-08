@@ -36,20 +36,6 @@ interface RegisterResponse {
   message?: string;
 }
 
-const loginVerifyRequest = async (
-  uid: string,
-  phoneNumber: string
-): Promise<LoginVerifyResponse> => {
-  const response = await fetch(`${API_URL}/login-verify`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ uid, phoneNumber }),
-  });
-  return response.json();
-};
-
 const registerRequest = async (
   uid: string,
   phoneNumber: string,
