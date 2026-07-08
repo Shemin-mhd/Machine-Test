@@ -1,10 +1,11 @@
+import path from "path";
 import dotenv from "dotenv";
 import app from "./app";
 import connectDB from "./config/db";
 
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, "../../.env") });
 
-// Connect Database
+
 connectDB();
 
 const PORT = process.env.PORT || 5000;
