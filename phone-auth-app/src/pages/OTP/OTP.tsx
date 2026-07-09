@@ -23,6 +23,7 @@ interface RegisterResponse {
   message?: string;
 }
 
+
 const registerRequest = async (
   uid: string,
   phoneNumber: string,
@@ -35,9 +36,21 @@ const registerRequest = async (
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ uid, phoneNumber, firstName, lastName, email }),
+    body: JSON.stringify({
+      uid,
+      phoneNumber,
+      firstName,
+      lastName,
+      email,
+    }),
   });
-  return response.json();
+
+  console.log("Status:", response.status);
+
+  const text = await response.text();
+  console.log("Response:", text);
+
+  return JSON.parse(text);
 };
 
 export const OTP: React.FC = () => {
